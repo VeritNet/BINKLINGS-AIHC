@@ -1,0 +1,86 @@
+<body>
+    <div style="position: relative; z-index: 1; animation: fade-in 1s ease 0s forwards; height: 110%;" align="right">
+        <h2 class="back" onclick="window.location.assign('http://ai.binklings.com/')">BINKLINGS AI</h2>
+        <button class="btn-3">Download</button>
+        <h1 style="color: white; left: 5%; bottom: 10%; position: absolute;" id="head"><b style="color: orange;">Fast</b> and <b style="color: orange;">Stable</b> <b style="color: skyblue;">AI</b> Gesture Remote Control System</h1>
+    </div>
+    <div style="background-color: black; height: 100%; width: 100%; z-index: 2; padding: 0;" id="bd">
+        
+    </div>
+</body>
+<style>
+@keyframes fade-in{
+ from{
+  opacity: 0;
+ }
+ to{
+  opacity: 1;
+ }
+}
+
+#overlay_bg {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: -1;
+    background-color: black
+}
+
+.btn-3 {
+    display: inline-block;
+    z-index: 3;
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: rgba(178, 188, 255, 0.9);
+    border: none;
+    position: relative;
+    border-radius: 5px;
+    transition: all 0.25s ease-in-out;
+}
+.btn-3:hover {
+    background: #000;
+    color: #fff;
+    box-shadow: 0 0 0 3px darkgray;
+    transition: all 0.25s ease-in-out;
+}
+
+.back {
+    color: gray;
+    position: fixed;
+    left: 3%;
+    transition: all 0.25s ease-in-out;
+}
+.back:hover {
+    color: white;
+    transition: all 0.25s ease-in-out;
+}
+</style>
+
+<script>
+const img = new Image();
+img.src = 'https://images.unsplash.com/photo-1701523974048-cd274e89f4ed';
+overlay_bg = document.createElement('div');
+overlay_bg.id = 'overlay_bg'
+overlay_bg.setAttribute('backdrop-filter','blur(5px)')
+document.body.appendChild(overlay_bg)
+img.onload = function() {
+  document.body.style.backgroundImage = `url(${img.src})`;
+  opacity_bg = 1;
+  var intervalId = setInterval(function() {
+    opacity_bg -= 0.01;
+    overlay_bg.style.opacity = opacity_bg;
+    if (opacity_bg <= 0) {
+      clearInterval(intervalId);
+      document.body.removeChild(overlay_bg);
+    }
+  }, 1);
+};
+document.body.setAttribute('style','background: #000 no-repeat center center;background-size: cover;background-attachment: fixed;')
+
+window.addEventListener("scroll",(event) =>{
+  document.getElementById("head").style.opacity = 1 - (1.5 * this.scrollY/window.innerHeight)
+  document.getElementById("bd").style.opacity = this.scrollY/window.innerHeight
+})
+</script>
